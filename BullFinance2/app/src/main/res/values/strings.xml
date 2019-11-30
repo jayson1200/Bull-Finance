@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Bull Finance</string>
+    <color name="white">#FFFFFF</color>
+    <color name="green">#009e05</color>
+    <color name="red">#bd0000</color>
+    <string name="SplashPicture">Bull</string>
+    <string name="IDKmaybelater">Bull</string>
+</resources>
