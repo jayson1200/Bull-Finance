@@ -13,13 +13,11 @@
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="10dp"
         android:contentDescription="@string/IDKmaybelater"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/Searchbox"
+        app:layout_constraintBottom_toBottomOf="@+id/Bullfinancetxt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/bull" />
 
     <ImageView
@@ -54,13 +52,16 @@
         android:layout_height="229dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:contentDescription="@string/IDKmaybelater"
         android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Searchbox"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/curvedtopnewsrect" />
 
     <ImageView
@@ -69,12 +70,15 @@
         android:layout_height="52dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp"
         android:contentDescription="@string/IDKmaybelater"
         android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NewsLinkImagebox"
+        app:layout_constraintVertical_bias="0.017"
         app:srcCompat="@drawable/watchlisttxt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
