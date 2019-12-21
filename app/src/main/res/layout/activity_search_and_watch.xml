@@ -15,61 +15,17 @@
         android:layout_marginTop="16dp"
         android:contentDescription="@string/IDKmaybelater"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="@+id/Bullfinancetxt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bull" />
-
-    <ImageView
-        android:id="@+id/Bullfinancetxt"
-        android:layout_width="189dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="24dp"
-        android:contentDescription="@string/IDKmaybelater"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.087"
-        app:layout_constraintStart_toEndOf="@+id/Bull"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bullfinance" />
-
-    <ImageView
-        android:id="@+id/Searchbox"
-        android:layout_width="379dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:contentDescription="@string/IDKmaybelater"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Bullfinancetxt"
-        app:srcCompat="@drawable/curvedsearchrect" />
 
     <ImageView
         android:id="@+id/NewsLinkImagebox"
         android:layout_width="385dp"
         android:layout_height="229dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:contentDescription="@string/IDKmaybelater"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Searchbox"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/curvedtopnewsrect" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="230dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
         android:layout_marginBottom="8dp"
         android:contentDescription="@string/IDKmaybelater"
         android:scaleType="fitXY"
@@ -77,8 +33,59 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchEditText"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/curvedtopnewsrect" />
+
+    <TextView
+        android:id="@+id/watchlistText"
+        android:layout_width="227dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/signika_negative_bold"
+        android:text="Watchlist"
+        android:textColor="#000000"
+        android:textSize="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NewsLinkImagebox"
-        app:layout_constraintVertical_bias="0.017"
-        app:srcCompat="@drawable/watchlisttxt" />
+        app:layout_constraintVertical_bias="0.048" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="231dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/signika_negative_bold"
+        android:text="Bull Finance"
+        android:textColor="#000000"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/Bull"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/searchEditText"
+        android:layout_width="375dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/curvedsearchrect"
+        android:ems="10"
+        android:fontFamily="@font/signika_negative_bold"
+        android:inputType="textPersonName"
+        android:paddingLeft="20dp"
+        android:text="Ticker Symbol or Name"
+        android:textColor="#525151"
+        android:textCursorDrawable="@android:color/black"
+        android:textSize="21dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.615"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
