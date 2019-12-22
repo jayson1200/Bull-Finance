@@ -20,18 +20,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bull" />
 
-    <ImageView
-        android:id="@+id/BullFinanceTxt"
-        android:layout_width="332dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="228dp"
-        android:contentDescription="@string/SplashPicture"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/Bull"
+    <TextView
+        android:id="@+id/bullText"
+        android:layout_width="328dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/signika_negative_bold"
+        android:text="Bull Finance"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/bullfinance" />
+        app:layout_constraintVertical_bias="0.28" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
