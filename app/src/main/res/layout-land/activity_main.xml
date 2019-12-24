@@ -21,7 +21,7 @@
         app:srcCompat="@drawable/bull" />
 
     <ImageView
-        android:id="@+id/BullFinanceTxt"
+        android:id="@+id/bullFinanceTxt"
         android:layout_width="332dp"
         android:layout_height="75dp"
         android:layout_marginTop="228dp"

@@ -22,23 +22,16 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    public RequestQueue queue;
-
     String url = "https://financialmodelingprep.com//api/v3/majors-indexes/.DJI";
     ConstraintLayout theSplashScreen;
 
     private static final String TAG = MainActivity.class.getSimpleName();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        queue = Volley.newRequestQueue(this);
 
         theSplashScreen = (ConstraintLayout) findViewById(R.id.activity_Main);
 
