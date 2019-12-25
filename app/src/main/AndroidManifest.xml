@@ -13,9 +13,12 @@
         android:theme="@style/AppTheme"
         >
 
-        <activity android:name=".Settings"></activity>
-        <activity android:name=".SearchAndWatch" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Settings"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name=".SearchAndWatch"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
