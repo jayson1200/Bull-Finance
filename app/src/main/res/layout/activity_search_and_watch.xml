@@ -79,7 +79,7 @@
         android:ems="10"
         android:fontFamily="@font/signika_negative_bold"
         android:inputType="textPersonName"
-        android:paddingLeft="60dp"
+        android:paddingLeft="50dp"
         android:text="Ticker Symbol or Name"
         android:textColor="#525151"
         android:textCursorDrawable="@android:color/black"
@@ -91,8 +91,8 @@
 
     <ImageView
         android:id="@+id/searchGlass"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/searchEditText"
         app:layout_constraintEnd_toEndOf="@+id/searchEditText"
         app:layout_constraintHorizontal_bias="0.047"
