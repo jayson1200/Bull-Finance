@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.bullfinance.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_News"
+        android:name="com.example.bullfinance.ui.News.NewsFragment"
+        android:label="@string/title_News"
+        tools:layout="@layout/fragment_news" />
+
+    <fragment
+        android:id="@+id/navigation_PatternIndicators"
+        android:name="com.example.bullfinance.ui.patternindicators.PatternFragment"
+        android:label="@string/title_patternindicators"
+        tools:layout="@layout/fragment_pattern" />
+
+    <fragment
+        android:id="@+id/navigation_SpecialStats"
+        android:name="com.example.bullfinance.ui.specialstats.specialstatsFragment"
+        android:label="@string/title_specialstats"
+        tools:layout="@layout/fragment_specialstats" />
+
+</navigation>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/stockearnings"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_News"
+        android:icon="@drawable/brokennewspapper"
+        android:title="@string/title_News" />
+
+    <item
+        android:id="@+id/navigation_PatternIndicators"
+        android:icon="@drawable/pattern"
+        android:title="@string/title_patternindicators" />
+
+    <item
+        android:id="@+id/navigation_SpecialStats"
+        android:icon="@drawable/mathscalculator"
+        android:title="@string/title_specialstats" />
+
+</menu>

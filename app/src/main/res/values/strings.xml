@@ -5,4 +5,9 @@
     <color name="red">#bd0000</color>
     <string name="SplashPicture">Bull</string>
     <string name="IDKmaybelater">Bull</string>
+    <string name="title_activity_stockinfo">stockinfo</string>
+    <string name="title_home">Home</string>
+    <string name="title_News">News</string>
+    <string name="title_patternindicators">Pattern Indicators</string>
+    <string name="title_specialstats">Special Stats</string>
 </resources>

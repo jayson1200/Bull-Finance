@@ -5,18 +5,16 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Activity;
 import android.content.Context;
-import android.net.ConnectivityManager;
 
-import android.net.NetworkInfo;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import java.lang.Object;
 
 public class SearchAndWatch extends AppCompatActivity {
 
@@ -41,6 +39,22 @@ public class SearchAndWatch extends AppCompatActivity {
                 if (hasFocus == true) {
                     usrSearch.setText("");
                 }
+            }
+        });
+
+        final Intent toStockInfo = new Intent(SearchAndWatch.this, stockinfo.class);
+
+        usrSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                if (actionId == EditorInfo.IME_ACTION_SEARCH)
+                {
+                    startActivity(toStockInfo);
+                    finish();
+                }
+
+                return false;
             }
         });
 

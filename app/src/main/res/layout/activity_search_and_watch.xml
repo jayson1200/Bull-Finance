@@ -83,6 +83,7 @@
         android:text="Ticker Symbol or Name"
         android:textColor="#525151"
         android:textCursorDrawable="@android:color/black"
+        android:imeOptions="actionSearch"
         android:textSize="21dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.615"
