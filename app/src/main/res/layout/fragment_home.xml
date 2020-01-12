@@ -6,34 +6,17 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/StockName"
-        android:layout_width="151dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/signika_negative_bold"
-        android:text="Stock"
-        android:textColor="#000000"
-        android:textSize="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
         android:id="@+id/priceText"
-        android:layout_width="165dp"
-        android:layout_height="51dp"
+        android:layout_width="184dp"
+        android:layout_height="67dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="75dp"
         android:fontFamily="@font/signika_negative_bold"
         android:text="Price"
         android:textColor="#000000"
-        android:textSize="36dp"
+        android:textSize="50dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/StockName" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/chartPlaceHolder"

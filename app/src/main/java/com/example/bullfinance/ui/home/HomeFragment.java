@@ -28,7 +28,7 @@ import org.json.JSONObject;
 
 public class HomeFragment extends Fragment {
 
-    public TextView theStockName;
+
     public TextView thePrice;
 
     public Bundle bundle;
@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        theStockName = (TextView) root.findViewById(R.id.StockName);
+
         thePrice = (TextView) root.findViewById(R.id.priceText);
 
         bundle = getActivity().getIntent().getExtras();
