@@ -6,4 +6,5 @@
     <color type= "color" name= "BullGreen">#1b990b</color>
     <color type= "color" name= "BullRed">#e33131</color>
     <color type= "color" name= "White">#ffffff</color>
+    <color type= "color" name= "Black">#000000</color>
 </resources>

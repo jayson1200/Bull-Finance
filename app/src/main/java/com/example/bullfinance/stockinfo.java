@@ -1,5 +1,6 @@
 package com.example.bullfinance;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -10,6 +11,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.app.ActionBar;
 
 public class stockinfo extends AppCompatActivity {
 
@@ -28,7 +30,15 @@ public class stockinfo extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+
+        toolbar.setTitleTextColor(Color.BLACK);
+
         setSupportActionBar(toolbar);
+
+        ActionBar theToolbar = getSupportActionBar();
+
+        // Enable the Up button
+        theToolbar.setDisplayHomeAsUpEnabled(true);
 
     }
 
