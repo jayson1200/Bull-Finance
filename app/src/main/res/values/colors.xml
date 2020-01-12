@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color type= "color" name= "BullGreen">#1b990b</color>
     <color type= "color" name= "BullRed">#e33131</color>
+    <color type= "color" name= "White">#ffffff</color>
 </resources>

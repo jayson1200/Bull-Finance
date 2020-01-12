@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         theSplashScreen = (ConstraintLayout) findViewById(R.id.activity_Main);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest marketUpDownRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        NetworkBridge.getInstance(this).addToRequestQueue(jsonObjectRequest);
+        NetworkBridge.getInstance(this).addToRequestQueue(marketUpDownRequest);
 
         new Handler().postDelayed(new Runnable() {
             @Override

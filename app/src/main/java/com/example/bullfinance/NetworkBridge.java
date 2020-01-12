@@ -9,7 +9,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
-class NetworkBridge
+public class NetworkBridge
 {
     private static NetworkBridge instance;
     private static Context ctx;
@@ -60,4 +60,6 @@ class NetworkBridge
     public ImageLoader getImageLoader() {
         return imageLoader;
     }
+
+
 }

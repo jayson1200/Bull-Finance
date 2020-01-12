@@ -50,6 +50,7 @@ public class SearchAndWatch extends AppCompatActivity {
 
                 if (actionId == EditorInfo.IME_ACTION_SEARCH)
                 {
+                    toStockInfo.putExtra("STOCKTICKER", usrSearch.getText().toString().toUpperCase());
                     startActivity(toStockInfo);
                     finish();
                 }

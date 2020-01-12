@@ -30,4 +30,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
 
+    <include layout="@layout/toolbar"
+     android:id="@+id/toolbar"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
