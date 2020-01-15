@@ -31,8 +31,6 @@ public class stockinfo extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
 
-        toolbar.setTitleTextColor(Color.BLACK);
-
         setSupportActionBar(toolbar);
 
         ActionBar theToolbar = getSupportActionBar();

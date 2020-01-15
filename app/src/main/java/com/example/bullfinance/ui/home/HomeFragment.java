@@ -92,7 +92,7 @@ public class HomeFragment extends Fragment {
     Runnable periodicUpdate = new Runnable() {
         @Override
         public void run() {
-            handler.postDelayed(periodicUpdate, 5 * 1000);
+            handler.postDelayed(periodicUpdate, 4 * 1000);
 
             setStockPrice();
         }
