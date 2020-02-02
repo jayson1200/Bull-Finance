@@ -22,13 +22,19 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.bullfinance.NetworkBridge;
 import com.example.bullfinance.R;
 import com.github.mikephil.charting.charts.CandleStickChart;
+import com.github.mikephil.charting.data.CandleData;
+import com.github.mikephil.charting.data.CandleDataSet;
+import com.github.mikephil.charting.data.CandleEntry;
 import com.github.mikephil.charting.data.Entry;
 
 
 import android.os.Handler;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
@@ -41,7 +47,10 @@ public class HomeFragment extends Fragment {
 
     public String url;
 
-    public CandleStickChart theChart;
+    public String chartUrl;
+
+    static public CandleStickChart theChart;
+
 
 
     Handler handler = new Handler();
@@ -60,15 +69,24 @@ public class HomeFragment extends Fragment {
 
         url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/" + tickerSymbol;
 
-        setStockPrice();
+        chartUrl = "https://financialmodelingprep.com/api/v3/historical-price-full/"+ tickerSymbol + "?from=2019-12-30&to=2020-01-30"; //<<<<This last part should become the time period in which the chart is going for
+
+        SetStockPrice();
         handler.postDelayed(periodicUpdate, 5 * 1000);
 
+        theChart.setTouchEnabled(true);
+        theChart.setDragEnabled(true);
+        theChart.setScaleEnabled(true);
+        theChart.setPinchZoom(true);
+        theChart.setDoubleTapToZoomEnabled(true);
+
+        MakeCandleStockChart();
 
         return root;
     }
 
 
-    public void setStockPrice() {
+    public void SetStockPrice() {
 
 
         JsonObjectRequest getStockPriceRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -78,9 +96,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-
-
-
                     thePriceObt = response.getDouble("price");
 
                     thePrice.setText(thePriceObt.toString());
@@ -106,8 +121,47 @@ public class HomeFragment extends Fragment {
         public void run() {
             handler.postDelayed(periodicUpdate, 4 * 1000);
 
-            setStockPrice();
+            SetStockPrice();
         }
     };
 
+    public void MakeCandleStockChart()
+    {
+        JsonObjectRequest getStockPriceRequest = new JsonObjectRequest(Request.Method.GET, chartUrl, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    ArrayList<CandleEntry> candleEntries = new ArrayList<CandleEntry>();
+
+                    JSONArray histroicalArray = response.getJSONArray("historical");
+
+                    for(int i = 0; i  < histroicalArray.length(); i++)
+                    {
+                        candleEntries.add(new CandleEntry(1, histroicalArray.getJSONObject(i).getInt("high"), histroicalArray.getJSONObject(i).getInt("low"), histroicalArray.getJSONObject(i).getInt("open"), histroicalArray.getJSONObject(i).getInt("close")));
+                    }
+
+                    CandleDataSet chartSet = new CandleDataSet(candleEntries, "Data Set");
+
+                    CandleData data = new CandleData(chartSet);
+
+                    theChart.setData(data);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        NetworkBridge.getInstance(getContext()).addToRequestQueue(getStockPriceRequest);
+    }
+
 }
+
