@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -20,6 +21,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.bullfinance.NetworkBridge;
 import com.example.bullfinance.R;
+import com.github.mikephil.charting.charts.CandleStickChart;
+import com.github.mikephil.charting.data.Entry;
+
 
 import android.os.Handler;
 
@@ -37,14 +41,18 @@ public class HomeFragment extends Fragment {
 
     public String url;
 
+    public CandleStickChart theChart;
+
+
     Handler handler = new Handler();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-
         thePrice = (TextView) root.findViewById(R.id.priceText);
+
+        theChart = root.findViewById(R.id.chart);
 
         bundle = getActivity().getIntent().getExtras();
 
@@ -55,6 +63,7 @@ public class HomeFragment extends Fragment {
         setStockPrice();
         handler.postDelayed(periodicUpdate, 5 * 1000);
 
+
         return root;
     }
 
@@ -63,11 +72,14 @@ public class HomeFragment extends Fragment {
 
 
         JsonObjectRequest getStockPriceRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+            Double thePriceObt;
+
             @Override
             public void onResponse(JSONObject response) {
                 try {
 
-                    Double thePriceObt;
+
 
                     thePriceObt = response.getDouble("price");
 
