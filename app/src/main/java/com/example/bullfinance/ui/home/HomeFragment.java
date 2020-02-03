@@ -1,6 +1,7 @@
 package com.example.bullfinance.ui.home;
 
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,11 +22,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.bullfinance.NetworkBridge;
 import com.example.bullfinance.R;
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.CandleStickChart;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.CandleData;
 import com.github.mikephil.charting.data.CandleDataSet;
 import com.github.mikephil.charting.data.CandleEntry;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 
 import android.os.Handler;
@@ -35,8 +39,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Set;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment{
 
 
     public TextView thePrice;
@@ -69,7 +74,7 @@ public class HomeFragment extends Fragment {
 
         url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/" + tickerSymbol;
 
-        chartUrl = "https://financialmodelingprep.com/api/v3/historical-price-full/"+ tickerSymbol + "?from=2019-12-30&to=2020-01-30"; //<<<<This last part should become the time period in which the chart is going for
+        chartUrl = "https://financialmodelingprep.com/api/v3/historical-price-full/"+ tickerSymbol + "?from=2018-12-30&to=2020-02-02"; //<<<<This last part should become the time period in which the chart is going for
 
         SetStockPrice();
         handler.postDelayed(periodicUpdate, 5 * 1000);
@@ -79,6 +84,10 @@ public class HomeFragment extends Fragment {
         theChart.setScaleEnabled(true);
         theChart.setPinchZoom(true);
         theChart.setDoubleTapToZoomEnabled(true);
+        theChart.getDescription().setEnabled(false);
+        theChart.setHighlightPerDragEnabled(true);
+
+        theChart.animateXY(3000, 3000);
 
         MakeCandleStockChart();
 
@@ -138,14 +147,28 @@ public class HomeFragment extends Fragment {
 
                     for(int i = 0; i  < histroicalArray.length(); i++)
                     {
-                        candleEntries.add(new CandleEntry(1, histroicalArray.getJSONObject(i).getInt("high"), histroicalArray.getJSONObject(i).getInt("low"), histroicalArray.getJSONObject(i).getInt("open"), histroicalArray.getJSONObject(i).getInt("close")));
+                        candleEntries.add(new CandleEntry(i, histroicalArray.getJSONObject(i).getInt("high"), histroicalArray.getJSONObject(i).getInt("low"), histroicalArray.getJSONObject(i).getInt("open"), histroicalArray.getJSONObject(i).getInt("close")));
                     }
 
-                    CandleDataSet chartSet = new CandleDataSet(candleEntries, "Data Set");
+                    CandleDataSet chartSet = new CandleDataSet(candleEntries, tickerSymbol);
+
+                    chartSet.setDrawIcons(false);
+                    chartSet.setAxisDependency(YAxis.AxisDependency.LEFT);
+                    chartSet.setShadowColor(Color.BLACK);
+                    chartSet.setShadowWidth(0.7f);
+                    chartSet.setDecreasingColor(Color.RED);
+                    chartSet.setDecreasingPaintStyle(Paint.Style.FILL);
+                    chartSet.setIncreasingColor(Color.rgb(122, 242, 84));
+                    chartSet.setIncreasingPaintStyle(Paint.Style.FILL);
+                    chartSet.setNeutralColor(Color.BLUE);
+                    chartSet.setHighlightEnabled(true);
+                    chartSet.setHighLightColor(Color.BLACK);
 
                     CandleData data = new CandleData(chartSet);
 
                     theChart.setData(data);
+
+                    theChart.invalidate();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
