@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:nestedScrollingEnabled="true">
 
     <TextView
         android:id="@+id/priceText"
@@ -39,12 +40,123 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chart">
+        app:layout_constraintTop_toBottomOf="@+id/chart"
+        android:scrollbars="none">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ConstraintLayout"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/todaybtn"
+                android:layout_width="73dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/curvedbtn"
+                android:fontFamily="@font/signika_negative_bold"
+                android:text="Today"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/fivedaybtn"
+                android:layout_width="73dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/curvedbtn"
+                android:fontFamily="@font/signika_negative_bold"
+                android:text="5D"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/todaybtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/twoweeksbtn"
+                android:layout_width="73dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/curvedbtn"
+                android:fontFamily="@font/signika_negative_bold"
+                android:text="2wk"
+                app:layout_constraintStart_toEndOf="@+id/fivedaybtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/monthbtn"
+                android:layout_width="73dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/curvedbtn"
+                android:fontFamily="@font/signika_negative_bold"
+                android:text="1M"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/twoweeksbtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/sixmonthbtn"
+                android:layout_width="73dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/curvedbtn"
+                android:fontFamily="@font/signika_negative_bold"
+                android:text="6M"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/monthbtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/lstqtr"
+                android:layout_width="73dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/curvedbtn"
+                android:fontFamily="@font/signika_negative_bold"
+                android:text="Lst Qtr"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/sixmonthbtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/oneyearbtn"
+                android:layout_width="73dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/curvedbtn"
+                android:fontFamily="@font/signika_negative_bold"
+                android:text="1YR"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/lstqtr"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Button
+                android:id="@+id/alltimebtn"
+                android:layout_width="73dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/curvedbtn"
+                android:fontFamily="@font/signika_negative_bold"
+                android:text="All Time"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ytdbtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/ytdbtn"
+                android:layout_width="73dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/curvedbtn"
+                android:fontFamily="@font/signika_negative_bold"
+                android:text="YTD"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/oneyearbtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
