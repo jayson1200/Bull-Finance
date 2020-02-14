@@ -167,6 +167,7 @@ public class HomeFragment extends Fragment{
                     CandleData data = new CandleData(chartSet);
 
                     theChart.setData(data);
+                    theChart.highlightValue(theChart.getHighlighter().getHighlight(theChart.getWidth(), 0));
 
                     theChart.invalidate();
 
