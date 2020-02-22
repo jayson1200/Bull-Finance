@@ -1,207 +1,277 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:nestedScrollingEnabled="true">
+    android:nestedScrollingEnabled="true"
+    android:paddingBottom="100dp"
+    android:scrollbarSize="4dp"
+    android:scrollbars="none">
 
-    <TextView
-        android:id="@+id/priceText"
-        android:layout_width="281dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="75dp"
-        android:fontFamily="@font/signika_negative_bold"
-        android:text="Price"
-        android:textColor="#000000"
-        android:textSize="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbarSize="4dp">
 
-    <com.github.mikephil.charting.charts.CandleStickChart
-        android:id="@+id/chart"
-        android:layout_width="0dp"
-        android:layout_height="400dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priceText"
-        app:layout_constraintVertical_bias="0.0" />
+        <TextView
+            android:id="@+id/priceText"
+            android:layout_width="281dp"
+            android:layout_height="78dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="75dp"
+            android:fontFamily="@font/signika_negative_bold"
+            android:text="Price"
+            android:textColor="#000000"
+            android:textSize="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <HorizontalScrollView
-        android:id="@+id/timeScrollView"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:scrollbars="none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeFrameText">
+        <com.github.mikephil.charting.charts.CandleStickChart
+            android:id="@+id/chart"
+            android:layout_width="0dp"
+            android:layout_height="400dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priceText"
+            app:layout_constraintVertical_bias="0.0" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/ConstraintLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+        <HorizontalScrollView
+            android:id="@+id/timeScrollView"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeFrameText">
 
-            <Button
-                android:id="@+id/todaybtn"
-                android:layout_width="73dp"
-                android:layout_height="41dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/curvedbtn"
-                android:fontFamily="@font/signika_negative_bold"
-                android:text="Today"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/fivedaybtn"
-                android:layout_width="73dp"
-                android:layout_height="41dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/curvedbtn"
-                android:fontFamily="@font/signika_negative_bold"
-                android:text="5D"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/todaybtn"
-                app:layout_constraintTop_toTopOf="parent" />
+                <Button
+                    android:id="@+id/todaybtn"
+                    android:layout_width="73dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/curvedbtn"
+                    android:fontFamily="@font/signika_negative_bold"
+                    android:text="Today"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/twoweeksbtn"
-                android:layout_width="73dp"
-                android:layout_height="41dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/curvedbtn"
-                android:fontFamily="@font/signika_negative_bold"
-                android:text="2wk"
-                app:layout_constraintStart_toEndOf="@+id/fivedaybtn"
-                app:layout_constraintTop_toTopOf="parent" />
+                <Button
+                    android:id="@+id/fivedaybtn"
+                    android:layout_width="73dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/curvedbtn"
+                    android:fontFamily="@font/signika_negative_bold"
+                    android:text="5D"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/todaybtn"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/monthbtn"
-                android:layout_width="73dp"
-                android:layout_height="41dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/curvedbtn"
-                android:fontFamily="@font/signika_negative_bold"
-                android:text="1M"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/twoweeksbtn"
-                app:layout_constraintTop_toTopOf="parent" />
+                <Button
+                    android:id="@+id/twoweeksbtn"
+                    android:layout_width="73dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/curvedbtn"
+                    android:fontFamily="@font/signika_negative_bold"
+                    android:text="2wk"
+                    app:layout_constraintStart_toEndOf="@+id/fivedaybtn"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/sixmonthbtn"
-                android:layout_width="73dp"
-                android:layout_height="41dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/curvedbtn"
-                android:fontFamily="@font/signika_negative_bold"
-                android:text="6M"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/monthbtn"
-                app:layout_constraintTop_toTopOf="parent" />
+                <Button
+                    android:id="@+id/monthbtn"
+                    android:layout_width="73dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/curvedbtn"
+                    android:fontFamily="@font/signika_negative_bold"
+                    android:text="1M"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/twoweeksbtn"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/lstqtr"
-                android:layout_width="73dp"
-                android:layout_height="41dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/curvedbtn"
-                android:fontFamily="@font/signika_negative_bold"
-                android:text="Lst Qtr"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/sixmonthbtn"
-                app:layout_constraintTop_toTopOf="parent" />
+                <Button
+                    android:id="@+id/sixmonthbtn"
+                    android:layout_width="73dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/curvedbtn"
+                    android:fontFamily="@font/signika_negative_bold"
+                    android:text="6M"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/monthbtn"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/oneyearbtn"
-                android:layout_width="73dp"
-                android:layout_height="41dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/curvedbtn"
-                android:fontFamily="@font/signika_negative_bold"
-                android:text="1YR"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/lstqtr"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                <Button
+                    android:id="@+id/lstqtr"
+                    android:layout_width="73dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/curvedbtn"
+                    android:fontFamily="@font/signika_negative_bold"
+                    android:text="Lst Qtr"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/sixmonthbtn"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/alltimebtn"
-                android:layout_width="73dp"
-                android:layout_height="41dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/curvedbtn"
-                android:fontFamily="@font/signika_negative_bold"
-                android:text="All Time"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ytdbtn"
-                app:layout_constraintTop_toTopOf="parent" />
+                <Button
+                    android:id="@+id/oneyearbtn"
+                    android:layout_width="73dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/curvedbtn"
+                    android:fontFamily="@font/signika_negative_bold"
+                    android:text="1YR"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/lstqtr"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
-            <Button
-                android:id="@+id/ytdbtn"
-                android:layout_width="73dp"
-                android:layout_height="41dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/curvedbtn"
-                android:fontFamily="@font/signika_negative_bold"
-                android:text="YTD"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/oneyearbtn"
-                app:layout_constraintTop_toTopOf="parent" />
+                <Button
+                    android:id="@+id/alltimebtn"
+                    android:layout_width="73dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/curvedbtn"
+                    android:fontFamily="@font/signika_negative_bold"
+                    android:text="All Time"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ytdbtn"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </HorizontalScrollView>
+                <Button
+                    android:id="@+id/ytdbtn"
+                    android:layout_width="73dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/curvedbtn"
+                    android:fontFamily="@font/signika_negative_bold"
+                    android:text="YTD"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/oneyearbtn"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <HorizontalScrollView
-        android:id="@+id/intervalScrollView"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:scrollbars="none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/intervalText">
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </HorizontalScrollView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+        <HorizontalScrollView
+            android:id="@+id/intervalScrollView"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/intervalText">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </HorizontalScrollView>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/timeFrameText"
-        android:layout_width="102dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:fontFamily="@font/signika_negative_bold"
-        android:text="Time Frame:"
-        android:textSize="17dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chart" />
+                <Button
+                    android:id="@+id/int1daybtn"
+                    android:layout_width="73dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/curvedbtn"
+                    android:fontFamily="@font/signika_negative_bold"
+                    android:text="1D"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/intervalText"
-        android:layout_width="102dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/signika_negative_bold"
-        android:text="Interval:"
-        android:textSize="17dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeScrollView" />
+                <Button
+                    android:id="@+id/intfivedaybtn"
+                    android:layout_width="73dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/curvedbtn"
+                    android:fontFamily="@font/signika_negative_bold"
+                    android:text="5D"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/int1daybtn"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <Button
+                    android:id="@+id/intmonthbtn"
+                    android:layout_width="73dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/curvedbtn"
+                    android:fontFamily="@font/signika_negative_bold"
+                    android:text="1M"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/intfivedaybtn"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/intsixmonthbtn"
+                    android:layout_width="73dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/curvedbtn"
+                    android:fontFamily="@font/signika_negative_bold"
+                    android:text="6M"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/intmonthbtn"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/intoneyearbtn"
+                    android:layout_width="73dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/curvedbtn"
+                    android:fontFamily="@font/signika_negative_bold"
+                    android:text="1YR"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/intsixmonthbtn"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/timeFrameText"
+            android:layout_width="102dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/signika_negative_bold"
+            android:text="Time Frame:"
+            android:textSize="17dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chart" />
+
+        <TextView
+            android:id="@+id/intervalText"
+            android:layout_width="102dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/signika_negative_bold"
+            android:text="Interval:"
+            android:textSize="17dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeScrollView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
