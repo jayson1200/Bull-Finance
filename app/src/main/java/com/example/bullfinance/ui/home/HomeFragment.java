@@ -29,6 +29,9 @@ import com.github.mikephil.charting.data.CandleData;
 import com.github.mikephil.charting.data.CandleDataSet;
 import com.github.mikephil.charting.data.CandleEntry;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.highlight.ChartHighlighter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.dataprovider.BarLineScatterCandleBubbleDataProvider;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 
@@ -55,8 +58,6 @@ public class HomeFragment extends Fragment{
     public String chartUrl;
 
     static public CandleStickChart theChart;
-
-
 
     Handler handler = new Handler();
 
@@ -167,7 +168,6 @@ public class HomeFragment extends Fragment{
                     CandleData data = new CandleData(chartSet);
 
                     theChart.setData(data);
-                    theChart.highlightValue(theChart.getHighlighter().getHighlight(theChart.getWidth(), 0));
 
                     theChart.invalidate();
 
