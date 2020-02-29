@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -61,6 +63,19 @@ public class HomeFragment extends Fragment{
 
     Handler handler = new Handler();
 
+    public Button todayBTN, fiveDayBTN, twoWeeksBTN, monthBTN, sixMonthBTN,lstQtrBTN, oneYearBTN, ytdBtn, allTimeBTN;
+
+    public Button intOneDayBTN, intFiveDayBTN, intMonthBTN, intSixMonthBTN,intOneYearBTN;
+
+    public Button selectedTimeFrameBTN;
+
+    public Button selectedIntervalBTN;
+
+    public ScrollView intervalScrollView;
+
+    public static ArrayList<CandleEntry> candleEntries = new ArrayList<CandleEntry>();
+
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -76,6 +91,25 @@ public class HomeFragment extends Fragment{
         url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/" + tickerSymbol;
 
         chartUrl = "https://financialmodelingprep.com/api/v3/historical-price-full/"+ tickerSymbol + "?from=2018-12-30&to=2020-02-02"; //<<<<This last part should become the time period in which the chart is going for
+
+        todayBTN = root.findViewById(R.id.todaybtn);
+        fiveDayBTN = root.findViewById(R.id.fivedaybtn);
+        twoWeeksBTN = root.findViewById(R.id.monthbtn);
+        monthBTN = root.findViewById(R.id.monthbtn);
+        sixMonthBTN = root.findViewById(R.id.sixmonthbtn);
+        lstQtrBTN = root.findViewById(R.id.lstqtrBtn);
+        oneYearBTN= root.findViewById(R.id.oneyearbtn);
+        ytdBtn = root.findViewById(R.id.ytdbtn);
+        allTimeBTN = root.findViewById(R.id.alltimebtn);
+
+
+        intOneDayBTN = root.findViewById(R.id.intonedaybtn);
+        intFiveDayBTN = root.findViewById(R.id.intfivedaybtn);
+        intMonthBTN = root.findViewById(R.id.intmonthbtn);
+        intSixMonthBTN = root.findViewById(R.id.intsixmonthbtn);
+        intOneYearBTN = root.findViewById(R.id.intoneyearbtn);
+
+        //intervalScrollView = root.findViewById(R.id.intervalScrollView);
 
         SetStockPrice();
         handler.postDelayed(periodicUpdate, 5 * 1000);
@@ -142,8 +176,6 @@ public class HomeFragment extends Fragment{
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    ArrayList<CandleEntry> candleEntries = new ArrayList<CandleEntry>();
-
                     JSONArray histroicalArray = response.getJSONArray("historical");
 
                     for(int i = 0; i  < histroicalArray.length(); i++)
