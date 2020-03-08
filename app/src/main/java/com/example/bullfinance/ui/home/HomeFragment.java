@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment {
 
     public ScrollView intervalScrollView;
 
-    public ArrayList<CandleEntry> candleEntries = new ArrayList<CandleEntry>();
+    public static ArrayList<CandleEntry> candleEntries = new ArrayList<CandleEntry>();
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -121,6 +121,11 @@ public class HomeFragment extends Fragment {
         theChart.setHighlightPerDragEnabled(true);
 
         theChart.animateXY(3000, 3000);
+
+        if(!candleEntries.isEmpty())
+        {
+            MakeCandleStockChart();
+        }
 
         return root;
 
