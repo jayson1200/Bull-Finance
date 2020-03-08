@@ -24,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.bullfinance.NetworkBridge;
 import com.example.bullfinance.R;
+import com.example.bullfinance.stockinfo;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.CandleStickChart;
 import com.github.mikephil.charting.components.YAxis;
@@ -46,7 +47,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Set;
 
-public class HomeFragment extends Fragment{
+public class HomeFragment extends Fragment {
 
 
     public TextView thePrice;
@@ -63,9 +64,9 @@ public class HomeFragment extends Fragment{
 
     Handler handler = new Handler();
 
-    public Button todayBTN, fiveDayBTN, twoWeeksBTN, monthBTN, sixMonthBTN,lstQtrBTN, oneYearBTN, ytdBtn, allTimeBTN;
+    public Button todayBTN, fiveDayBTN, twoWeeksBTN, monthBTN, sixMonthBTN, lstQtrBTN, oneYearBTN, ytdBtn, allTimeBTN;
 
-    public Button intOneDayBTN, intFiveDayBTN, intMonthBTN, intSixMonthBTN,intOneYearBTN;
+    public Button intOneDayBTN, intFiveDayBTN, intMonthBTN, intSixMonthBTN, intOneYearBTN;
 
     public Button selectedTimeFrameBTN;
 
@@ -73,7 +74,7 @@ public class HomeFragment extends Fragment{
 
     public ScrollView intervalScrollView;
 
-    public static ArrayList<CandleEntry> candleEntries = new ArrayList<CandleEntry>();
+    public ArrayList<CandleEntry> candleEntries = new ArrayList<CandleEntry>();
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -90,15 +91,13 @@ public class HomeFragment extends Fragment{
 
         url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/" + tickerSymbol;
 
-        chartUrl = "https://financialmodelingprep.com/api/v3/historical-price-full/"+ tickerSymbol + "?from=2018-12-30&to=2020-02-02"; //<<<<This last part should become the time period in which the chart is going for
-
         todayBTN = root.findViewById(R.id.todaybtn);
         fiveDayBTN = root.findViewById(R.id.fivedaybtn);
         twoWeeksBTN = root.findViewById(R.id.monthbtn);
         monthBTN = root.findViewById(R.id.monthbtn);
         sixMonthBTN = root.findViewById(R.id.sixmonthbtn);
         lstQtrBTN = root.findViewById(R.id.lstqtrBtn);
-        oneYearBTN= root.findViewById(R.id.oneyearbtn);
+        oneYearBTN = root.findViewById(R.id.oneyearbtn);
         ytdBtn = root.findViewById(R.id.ytdbtn);
         allTimeBTN = root.findViewById(R.id.alltimebtn);
 
@@ -109,7 +108,6 @@ public class HomeFragment extends Fragment{
         intSixMonthBTN = root.findViewById(R.id.intsixmonthbtn);
         intOneYearBTN = root.findViewById(R.id.intoneyearbtn);
 
-        //intervalScrollView = root.findViewById(R.id.intervalScrollView);
 
         SetStockPrice();
         handler.postDelayed(periodicUpdate, 5 * 1000);
@@ -124,9 +122,8 @@ public class HomeFragment extends Fragment{
 
         theChart.animateXY(3000, 3000);
 
-        MakeCandleStockChart();
-
         return root;
+
     }
 
 
@@ -153,7 +150,7 @@ public class HomeFragment extends Fragment{
 
             @Override
             public void onErrorResponse(VolleyError error) {
-              
+
             }
         });
 
@@ -169,54 +166,28 @@ public class HomeFragment extends Fragment{
         }
     };
 
-    public void MakeCandleStockChart()
-    {
-        JsonObjectRequest getStockPriceRequest = new JsonObjectRequest(Request.Method.GET, chartUrl, null, new Response.Listener<JSONObject>() {
+    public void MakeCandleStockChart() {
 
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONArray histroicalArray = response.getJSONArray("historical");
+        CandleDataSet chartSet = new CandleDataSet(candleEntries, tickerSymbol);
 
-                    for(int i = 0; i  < histroicalArray.length(); i++)
-                    {
-                        candleEntries.add(new CandleEntry(i, histroicalArray.getJSONObject(i).getInt("high"), histroicalArray.getJSONObject(i).getInt("low"), histroicalArray.getJSONObject(i).getInt("open"), histroicalArray.getJSONObject(i).getInt("close")));
-                    }
+        chartSet.setDrawIcons(false);
+        chartSet.setAxisDependency(YAxis.AxisDependency.LEFT);
+        chartSet.setShadowColor(Color.BLACK);
+        chartSet.setShadowWidth(0.7f);
+        chartSet.setDecreasingColor(Color.RED);
+        chartSet.setDecreasingPaintStyle(Paint.Style.FILL);
+        chartSet.setIncreasingColor(Color.rgb(122, 242, 84));
+        chartSet.setIncreasingPaintStyle(Paint.Style.FILL);
+        chartSet.setNeutralColor(Color.BLUE);
+        chartSet.setHighlightEnabled(true);
+        chartSet.setHighLightColor(Color.BLACK);
 
-                    CandleDataSet chartSet = new CandleDataSet(candleEntries, tickerSymbol);
+        CandleData data = new CandleData(chartSet);
 
-                    chartSet.setDrawIcons(false);
-                    chartSet.setAxisDependency(YAxis.AxisDependency.LEFT);
-                    chartSet.setShadowColor(Color.BLACK);
-                    chartSet.setShadowWidth(0.7f);
-                    chartSet.setDecreasingColor(Color.RED);
-                    chartSet.setDecreasingPaintStyle(Paint.Style.FILL);
-                    chartSet.setIncreasingColor(Color.rgb(122, 242, 84));
-                    chartSet.setIncreasingPaintStyle(Paint.Style.FILL);
-                    chartSet.setNeutralColor(Color.BLUE);
-                    chartSet.setHighlightEnabled(true);
-                    chartSet.setHighLightColor(Color.BLACK);
+        theChart.setData(data);
 
-                    CandleData data = new CandleData(chartSet);
+        theChart.invalidate();
 
-                    theChart.setData(data);
-
-                    theChart.invalidate();
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-
-        NetworkBridge.getInstance(getContext()).addToRequestQueue(getStockPriceRequest);
     }
 
 }
