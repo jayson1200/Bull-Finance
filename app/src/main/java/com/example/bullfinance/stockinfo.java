@@ -142,7 +142,7 @@ public class stockinfo extends AppCompatActivity {
                     HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment).getChildFragmentManager().getFragments().get(0);
                     homeFragment.candleEntries = candleData;
 
-                    homeFragment.MakeCandleStockChart();
+                    homeFragment.MakeCandleStockChart(candleData);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -27,6 +28,7 @@ import com.example.bullfinance.R;
 import com.example.bullfinance.stockinfo;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.CandleStickChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.CandleData;
 import com.github.mikephil.charting.data.CandleDataSet;
@@ -45,12 +47,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Set;
 
 public class HomeFragment extends Fragment {
 
 
     public TextView thePrice;
+
+    public TextView intervalText;
 
     public Bundle bundle;
 
@@ -64,17 +69,19 @@ public class HomeFragment extends Fragment {
 
     Handler handler = new Handler();
 
-    public Button todayBTN, fiveDayBTN, twoWeeksBTN, monthBTN, sixMonthBTN, lstQtrBTN, oneYearBTN, ytdBtn, allTimeBTN;
+    public Button todayBTN, fiveDayBTN, twoWeeksBTN, monthBTN, sixMonthBTN, lstQtrBTN, oneYearBTN, ytdBTN, allTimeBTN;
 
     public Button intOneDayBTN, intFiveDayBTN, intMonthBTN, intSixMonthBTN, intOneYearBTN;
 
-    public Button selectedTimeFrameBTN;
+    public String selectedTimeFrameBTN;
 
-    public Button selectedIntervalBTN;
+    public String selectedIntervalBTN;
 
-    public ScrollView intervalScrollView;
+    public HorizontalScrollView intervalScrollView, timeFrameScrollView;
 
     public static ArrayList<CandleEntry> candleEntries = new ArrayList<CandleEntry>();
+
+    //public ArrayList<CandleEntry> candleEntriesEdited = new ArrayList<CandleEntry>();
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -82,6 +89,8 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         thePrice = (TextView) root.findViewById(R.id.priceText);
+
+        intervalText = root.findViewById(R.id.intervalText);
 
         theChart = root.findViewById(R.id.chart);
 
@@ -91,22 +100,40 @@ public class HomeFragment extends Fragment {
 
         url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/" + tickerSymbol;
 
+        intervalScrollView = root.findViewById(R.id.intervalScrollView);
+        timeFrameScrollView = root.findViewById(R.id.timeScrollView);
+
         todayBTN = root.findViewById(R.id.todaybtn);
         fiveDayBTN = root.findViewById(R.id.fivedaybtn);
-        twoWeeksBTN = root.findViewById(R.id.monthbtn);
+        twoWeeksBTN = root.findViewById(R.id.twoweeksbtn);
         monthBTN = root.findViewById(R.id.monthbtn);
         sixMonthBTN = root.findViewById(R.id.sixmonthbtn);
         lstQtrBTN = root.findViewById(R.id.lstqtrBtn);
         oneYearBTN = root.findViewById(R.id.oneyearbtn);
-        ytdBtn = root.findViewById(R.id.ytdbtn);
+        ytdBTN = root.findViewById(R.id.ytdbtn);
         allTimeBTN = root.findViewById(R.id.alltimebtn);
-
 
         intOneDayBTN = root.findViewById(R.id.intonedaybtn);
         intFiveDayBTN = root.findViewById(R.id.intfivedaybtn);
         intMonthBTN = root.findViewById(R.id.intmonthbtn);
         intSixMonthBTN = root.findViewById(R.id.intsixmonthbtn);
         intOneYearBTN = root.findViewById(R.id.intoneyearbtn);
+        
+        todayBTN.setOnClickListener(TimeFrameBTNClickListener);
+        fiveDayBTN.setOnClickListener(TimeFrameBTNClickListener);
+        twoWeeksBTN.setOnClickListener(TimeFrameBTNClickListener);
+        monthBTN.setOnClickListener(TimeFrameBTNClickListener);
+        sixMonthBTN.setOnClickListener(TimeFrameBTNClickListener);
+        lstQtrBTN.setOnClickListener(TimeFrameBTNClickListener);
+        oneYearBTN.setOnClickListener(TimeFrameBTNClickListener);
+        ytdBTN.setOnClickListener(TimeFrameBTNClickListener);
+        allTimeBTN.setOnClickListener(TimeFrameBTNClickListener);
+
+        intOneDayBTN.setOnClickListener(IntervalBTNClickListener);
+        intFiveDayBTN.setOnClickListener(IntervalBTNClickListener);
+        intMonthBTN.setOnClickListener(IntervalBTNClickListener);
+        intSixMonthBTN.setOnClickListener(IntervalBTNClickListener);
+        intOneYearBTN.setOnClickListener(IntervalBTNClickListener);
 
 
         SetStockPrice();
@@ -124,8 +151,12 @@ public class HomeFragment extends Fragment {
 
         if(!candleEntries.isEmpty())
         {
-            MakeCandleStockChart();
+            MakeCandleStockChart(candleEntries);
         }
+
+
+        intervalScrollView.setVisibility(View.INVISIBLE);
+        intervalText.setVisibility(View.INVISIBLE);
 
         return root;
 
@@ -171,9 +202,9 @@ public class HomeFragment extends Fragment {
         }
     };
 
-    public void MakeCandleStockChart() {
+    public void MakeCandleStockChart(ArrayList<CandleEntry> theCandleEntries) {
 
-        CandleDataSet chartSet = new CandleDataSet(candleEntries, tickerSymbol);
+        CandleDataSet chartSet = new CandleDataSet(theCandleEntries, tickerSymbol);
 
         chartSet.setDrawIcons(false);
         chartSet.setAxisDependency(YAxis.AxisDependency.LEFT);
@@ -187,13 +218,269 @@ public class HomeFragment extends Fragment {
         chartSet.setHighlightEnabled(true);
         chartSet.setHighLightColor(Color.BLACK);
 
+        XAxis xAxis = theChart.getXAxis();
+
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+
         CandleData data = new CandleData(chartSet);
 
         theChart.setData(data);
 
         theChart.invalidate();
-
     }
+
+    public View.OnClickListener TimeFrameBTNClickListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v) {
+
+            Button theSelectedButton =  (Button) v;
+
+            intervalScrollView.setVisibility(View.VISIBLE);
+            intervalText.setVisibility(View.VISIBLE);
+
+            selectedIntervalBTN = "";
+
+            intOneDayBTN.setVisibility(View.VISIBLE);
+            intFiveDayBTN.setVisibility(View.VISIBLE);
+            intMonthBTN.setVisibility(View.VISIBLE);
+            intSixMonthBTN.setVisibility(View.VISIBLE);
+            intOneYearBTN.setVisibility(View.VISIBLE);
+
+            todayBTN.setTextColor(Color.BLACK);
+            fiveDayBTN.setTextColor(Color.BLACK);
+            twoWeeksBTN.setTextColor(Color.BLACK);
+            monthBTN.setTextColor(Color.BLACK);
+            sixMonthBTN.setTextColor(Color.BLACK);
+            lstQtrBTN.setTextColor(Color.BLACK);
+            oneYearBTN.setTextColor(Color.BLACK);
+            ytdBTN.setTextColor(Color.BLACK);
+            allTimeBTN.setTextColor(Color.BLACK);
+
+            intOneDayBTN.setTextColor(Color.BLACK);
+            intFiveDayBTN.setTextColor(Color.BLACK);
+            intMonthBTN.setTextColor(Color.BLACK);
+            intSixMonthBTN.setTextColor(Color.BLACK);
+            intOneYearBTN.setTextColor(Color.BLACK);
+
+            switch(v.getId())
+            {
+                case R.id.todaybtn:
+                    selectedTimeFrameBTN = "today";
+
+                    intervalScrollView.setVisibility(View.INVISIBLE);
+                    intervalText.setVisibility(View.INVISIBLE);
+
+                    todayBTN.setTextColor(Color.WHITE);
+
+                    intOneDayBTN.setVisibility(View.GONE);
+                    intFiveDayBTN.setVisibility(View.GONE);
+                    intMonthBTN.setVisibility(View.GONE);
+                    intSixMonthBTN.setVisibility(View.GONE);
+                    intOneYearBTN.setVisibility(View.GONE);
+                    break;
+
+                case R.id.fivedaybtn:
+                    selectedTimeFrameBTN = "fiveday";
+
+                    fiveDayBTN.setTextColor(Color.WHITE);
+
+                    intFiveDayBTN.setVisibility(View.GONE);
+                    intMonthBTN.setVisibility(View.GONE);
+                    intSixMonthBTN.setVisibility(View.GONE);
+                    intOneYearBTN.setVisibility(View.GONE);
+                    break;
+
+                case R.id.twoweeksbtn:
+                    selectedTimeFrameBTN = "twoweek";
+
+                    twoWeeksBTN.setTextColor(Color.WHITE);
+
+                    intMonthBTN.setVisibility(View.GONE);
+                    intSixMonthBTN.setVisibility(View.GONE);
+                    intOneYearBTN.setVisibility(View.GONE);
+                    break;
+
+                case R.id.monthbtn:
+                    selectedTimeFrameBTN = "month";
+
+                    monthBTN.setTextColor(Color.WHITE);
+
+                    intMonthBTN.setVisibility(View.GONE);
+                    intSixMonthBTN.setVisibility(View.GONE);
+                    intOneYearBTN.setVisibility(View.GONE);
+                    break;
+
+                case R.id.sixmonthbtn:
+                    selectedTimeFrameBTN = "sixmonth";
+
+                    sixMonthBTN.setTextColor(Color.WHITE);
+
+                    intSixMonthBTN.setVisibility(View.GONE);
+                    intOneYearBTN.setVisibility(View.GONE);
+                    break;
+
+                case R.id.lstqtrBtn:
+                    selectedTimeFrameBTN = "lastquarter";
+
+                    lstQtrBTN.setTextColor(Color.WHITE);
+
+                    intSixMonthBTN.setVisibility(View.GONE);
+                    intOneYearBTN.setVisibility(View.GONE);
+                    break;
+
+                case R.id.oneyearbtn:
+                    selectedTimeFrameBTN = "oneyear";
+
+                    oneYearBTN.setTextColor(Color.WHITE);
+
+                    intOneYearBTN.setVisibility(View.GONE);
+                    break;
+
+                case R.id.ytdbtn:
+                    selectedTimeFrameBTN = "ytd";
+
+                    ytdBTN.setTextColor(Color.WHITE);
+
+                    intOneYearBTN.setVisibility(View.GONE);
+                    break;
+
+                case R.id.alltimebtn:
+                    selectedTimeFrameBTN = "alltime";
+
+                    allTimeBTN.setTextColor(Color.WHITE);
+                    break;
+            }
+
+            MakeCandleStockChart(configureCandleData(selectedTimeFrameBTN, "lalalal", candleEntries));
+        }
+    };
+
+    public View.OnClickListener IntervalBTNClickListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v) {
+
+            Button theSelectedButton =  (Button) v;
+
+            intOneDayBTN.setTextColor(Color.BLACK);
+            intFiveDayBTN.setTextColor(Color.BLACK);
+            intMonthBTN.setTextColor(Color.BLACK);
+            intSixMonthBTN.setTextColor(Color.BLACK);
+            intOneYearBTN.setTextColor(Color.BLACK);
+
+            switch(v.getId())
+            {
+                case R.id.intonedaybtn:
+                    selectedIntervalBTN = "intoneday";
+
+                    intOneDayBTN.setTextColor(Color.WHITE);
+
+
+                    break;
+
+                case R.id.intfivedaybtn:
+                    selectedIntervalBTN = "intfiveday";
+
+                    intFiveDayBTN.setTextColor(Color.WHITE);
+                    break;
+
+                case R.id.intmonthbtn:
+                    selectedIntervalBTN = "intmonth";
+
+                    intMonthBTN.setTextColor(Color.WHITE);
+                    break;
+
+                case R.id.intsixmonthbtn:
+                    selectedIntervalBTN = "intsixmonth";
+
+                    intSixMonthBTN.setTextColor(Color.WHITE);
+                    break;
+
+                case R.id.intoneyearbtn:
+                    selectedIntervalBTN = "intoneyear";
+
+                    intOneYearBTN.setTextColor(Color.WHITE);
+                    break;
+            }
+        }
+    };
+
+    public ArrayList<CandleEntry> configureCandleData(String timeFrame, String interval, ArrayList<CandleEntry> uneditedCandleData)
+    {
+        ArrayList<CandleEntry> editedCandleData = uneditedCandleData;
+
+        switch(timeFrame)
+        {
+            case "fiveday":
+                editedCandleData =  new ArrayList<CandleEntry>(uneditedCandleData.subList(uneditedCandleData.size() -6, uneditedCandleData.size() -1));
+                break;
+
+            case "twoweek":
+                editedCandleData = new ArrayList<CandleEntry>(uneditedCandleData.subList(uneditedCandleData.size() -15, uneditedCandleData.size() -1));
+                break;
+
+            case "month":
+                editedCandleData = new ArrayList<CandleEntry>(uneditedCandleData.subList(uneditedCandleData.size() -31, uneditedCandleData.size() -1));
+                break;
+
+            case "sixmonth":
+                editedCandleData =  new ArrayList<CandleEntry>(uneditedCandleData.subList(uneditedCandleData.size() -181, uneditedCandleData.size() -1));
+                break;
+
+            case "lastquarter":
+                //Save for later implementation
+                try
+                {
+                    throw new ItsNoteEvenFinishedException("The Last quarter time frame is on company by company basis");
+                }
+                catch(ItsNoteEvenFinishedException exception)
+                {
+                    Log.w("HomeFragment", "Finish it or stop clicking on it");
+                }
+                break;
+
+            case "oneyear":
+                editedCandleData = new ArrayList<CandleEntry>(uneditedCandleData.subList(uneditedCandleData.size() -HowManyDaysPassed()-1, uneditedCandleData.size() -1));
+                break;
+
+            case "ytd":
+                editedCandleData = new ArrayList<CandleEntry>(uneditedCandleData.subList(uneditedCandleData.size() -360, uneditedCandleData.size() -1));
+                break;
+
+            case "alltime":
+                editedCandleData = uneditedCandleData;
+                break;
+        }
+
+        for(int i = 0; i < editedCandleData.size(); i++)
+        {
+            editedCandleData.get(i).setX(i);
+        }
+
+        return editedCandleData;
+    }
+
+
+    class ItsNoteEvenFinishedException extends Exception
+    {
+        public ItsNoteEvenFinishedException(String s)
+        {
+            super(s);
+        }
+    }
+
+    public int HowManyDaysPassed()
+    {
+        Calendar calendar = Calendar.getInstance();
+
+        Log.w("HomeFragment", calendar.get(Calendar.DAY_OF_YEAR) + "");
+
+        return calendar.get(Calendar.DAY_OF_YEAR);
+    }
+
+
 
 }
 
