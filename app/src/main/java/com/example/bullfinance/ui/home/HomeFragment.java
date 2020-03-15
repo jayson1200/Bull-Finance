@@ -213,6 +213,7 @@ public class HomeFragment extends Fragment {
         chartSet.setDecreasingColor(Color.RED);
         chartSet.setDecreasingPaintStyle(Paint.Style.FILL);
         chartSet.setIncreasingColor(Color.rgb(122, 242, 84));
+        chartSet.setValueTextSize(10f);
         chartSet.setIncreasingPaintStyle(Paint.Style.FILL);
         chartSet.setNeutralColor(Color.BLUE);
         chartSet.setHighlightEnabled(true);
