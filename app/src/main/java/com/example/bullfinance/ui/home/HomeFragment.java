@@ -353,8 +353,6 @@ public class HomeFragment extends Fragment {
                     allTimeBTN.setTextColor(Color.WHITE);
                     break;
             }
-
-            MakeCandleStockChart(configureCandleData(selectedTimeFrameBTN, "lalalal", candleEntries));
         }
     };
 
@@ -405,6 +403,8 @@ public class HomeFragment extends Fragment {
                     intOneYearBTN.setTextColor(Color.WHITE);
                     break;
             }
+
+            MakeCandleStockChart(configureCandleData(selectedTimeFrameBTN, selectedIntervalBTN, candleEntries));
         }
     };
 
@@ -415,18 +415,42 @@ public class HomeFragment extends Fragment {
         switch(timeFrame)
         {
             case "fiveday":
+
+                if(uneditedCandleData.size() < 6)
+                {
+                    break;
+                }
+
                 editedCandleData =  new ArrayList<CandleEntry>(uneditedCandleData.subList(uneditedCandleData.size() -6, uneditedCandleData.size() -1));
                 break;
 
             case "twoweek":
+
+                if(uneditedCandleData.size() < 15)
+                {
+                    break;
+                }
+
                 editedCandleData = new ArrayList<CandleEntry>(uneditedCandleData.subList(uneditedCandleData.size() -15, uneditedCandleData.size() -1));
                 break;
 
             case "month":
+
+                if(uneditedCandleData.size() < 31)
+                {
+                    break;
+                }
+
                 editedCandleData = new ArrayList<CandleEntry>(uneditedCandleData.subList(uneditedCandleData.size() -31, uneditedCandleData.size() -1));
                 break;
 
             case "sixmonth":
+
+                if(uneditedCandleData.size() < 181)
+                {
+                    break;
+                }
+
                 editedCandleData =  new ArrayList<CandleEntry>(uneditedCandleData.subList(uneditedCandleData.size() -181, uneditedCandleData.size() -1));
                 break;
 
@@ -443,15 +467,227 @@ public class HomeFragment extends Fragment {
                 break;
 
             case "oneyear":
+
+                if(uneditedCandleData.size() < HowManyDaysPassed())
+                {
+                    break;
+                }
+
                 editedCandleData = new ArrayList<CandleEntry>(uneditedCandleData.subList(uneditedCandleData.size() -HowManyDaysPassed()-1, uneditedCandleData.size() -1));
                 break;
 
             case "ytd":
-                editedCandleData = new ArrayList<CandleEntry>(uneditedCandleData.subList(uneditedCandleData.size() -360, uneditedCandleData.size() -1));
+                if(uneditedCandleData.size() < 361)
+                {
+                    break;
+                }
+
+                editedCandleData = new ArrayList<CandleEntry>(uneditedCandleData.subList(uneditedCandleData.size() -361, uneditedCandleData.size() -1));
                 break;
 
             case "alltime":
-                editedCandleData = uneditedCandleData;
+                break;
+        }
+
+        ArrayList<CandleEntry> intervalNewArray = new ArrayList<CandleEntry>();
+
+        int lastIndex;
+
+        float theHigh = 0, theLow = Float.MAX_VALUE;
+
+        switch(interval)
+        {
+            case "intoneday":
+                //Dont really do anything as it starts like this
+                break;
+            case "intfiveday":
+
+                lastIndex = 0;
+
+                for(int i = 0; i + 5 < editedCandleData.size(); i+=5)
+                {
+                    lastIndex++;
+
+                    theHigh = 0;
+                    theLow = Float.MAX_VALUE;
+
+                    for(int j = i; j < i+5; j++)
+                    {
+                        if(editedCandleData.get(j).getHigh() > theHigh)
+                        {
+                            theHigh = editedCandleData.get(j).getHigh();
+                        }
+
+                        if(editedCandleData.get(j).getLow() < theLow)
+                        {
+                            theLow = editedCandleData.get(j).getLow();
+                        }
+                    }
+
+                    intervalNewArray.add(new CandleEntry(i, theHigh, theLow,  editedCandleData.get(i).getOpen(), editedCandleData.get(i+5).getClose()));
+                }
+
+                theHigh = 0;
+                theLow = Float.MAX_VALUE;
+
+                for(int i = lastIndex; i < editedCandleData.size(); i++)
+                {
+                    if(editedCandleData.get(i).getHigh() > theHigh)
+                    {
+                        theHigh = editedCandleData.get(i).getHigh();
+                    }
+
+                    if(editedCandleData.get(i).getLow() < theLow)
+                    {
+                        theLow = editedCandleData.get(i).getLow();
+                    }
+                }
+
+                intervalNewArray.add(new CandleEntry(intervalNewArray.size(), theHigh, theLow,  editedCandleData.get(lastIndex).getOpen(), editedCandleData.get(editedCandleData.size() -1).getClose()));
+
+                editedCandleData = intervalNewArray;
+                break;
+            case "intmonth":
+                
+                lastIndex = 0;
+
+                for(int i = 0; i + 30 < editedCandleData.size(); i+=30)
+                {
+                    lastIndex++;
+
+                    theHigh = 0;
+                    theLow = Float.MAX_VALUE;
+
+                    for(int j = i; j < i+30; j++)
+                    {
+                        if(editedCandleData.get(j).getHigh() > theHigh)
+                        {
+                            theHigh = editedCandleData.get(j).getHigh();
+                        }
+
+                        if(editedCandleData.get(j).getLow() < theLow)
+                        {
+                            theLow = editedCandleData.get(j).getLow();
+                        }
+                    }
+
+                    intervalNewArray.add(new CandleEntry(i, theHigh, theLow,  editedCandleData.get(i).getOpen(), editedCandleData.get(i+30).getClose()));
+                }
+
+                theHigh = 0;
+                theLow = Float.MAX_VALUE;
+
+                for(int i = lastIndex; i < editedCandleData.size(); i++)
+                {
+                    if(editedCandleData.get(i).getHigh() > theHigh)
+                    {
+                        theHigh = editedCandleData.get(i).getHigh();
+                    }
+
+                    if(editedCandleData.get(i).getLow() < theLow)
+                    {
+                        theLow = editedCandleData.get(i).getLow();
+                    }
+                }
+
+                intervalNewArray.add(new CandleEntry(intervalNewArray.size(), theHigh, theLow,  editedCandleData.get(lastIndex).getOpen(), editedCandleData.get(editedCandleData.size() -1).getClose()));
+
+                editedCandleData = intervalNewArray;
+                break;
+            case "intsixmonth":
+
+                lastIndex = 0;
+
+                for(int i = 0; i + 180 < editedCandleData.size(); i+=180)
+                {
+                    lastIndex++;
+
+                    theHigh = 0;
+                    theLow = Float.MAX_VALUE;
+
+                    for(int j = i; j < i+180; j++)
+                    {
+                        if(editedCandleData.get(j).getHigh() > theHigh)
+                        {
+                            theHigh = editedCandleData.get(j).getHigh();
+                        }
+
+                        if(editedCandleData.get(j).getLow() < theLow)
+                        {
+                            theLow = editedCandleData.get(j).getLow();
+                        }
+                    }
+
+                    intervalNewArray.add(new CandleEntry(i, theHigh, theLow,  editedCandleData.get(i).getOpen(), editedCandleData.get(i+180).getClose()));
+                }
+
+                theHigh = 0;
+                theLow = Float.MAX_VALUE;
+
+                for(int i = lastIndex; i < editedCandleData.size(); i++)
+                {
+                    if(editedCandleData.get(i).getHigh() > theHigh)
+                    {
+                        theHigh = editedCandleData.get(i).getHigh();
+                    }
+
+                    if(editedCandleData.get(i).getLow() < theLow)
+                    {
+                        theLow = editedCandleData.get(i).getLow();
+                    }
+                }
+
+                intervalNewArray.add(new CandleEntry(intervalNewArray.size(), theHigh, theLow,  editedCandleData.get(lastIndex).getOpen(), editedCandleData.get(editedCandleData.size() -1).getClose()));
+
+                editedCandleData = intervalNewArray;
+                
+                break;
+            case "intoneyear":
+
+                lastIndex = 0;
+
+                for(int i = 0; i + 360 < editedCandleData.size(); i+=360)
+                {
+                    lastIndex++;
+
+                    theHigh = 0;
+                    theLow = Float.MAX_VALUE;
+
+                    for(int j = i; j < i+360; j++)
+                    {
+                        if(editedCandleData.get(j).getHigh() > theHigh)
+                        {
+                            theHigh = editedCandleData.get(j).getHigh();
+                        }
+
+                        if(editedCandleData.get(j).getLow() < theLow)
+                        {
+                            theLow = editedCandleData.get(j).getLow();
+                        }
+                    }
+
+                    intervalNewArray.add(new CandleEntry(i, theHigh, theLow,  editedCandleData.get(i).getOpen(), editedCandleData.get(i+360).getClose()));
+                }
+
+                theHigh = 0;
+                theLow = Float.MAX_VALUE;
+
+                for(int i = lastIndex; i < editedCandleData.size(); i++)
+                {
+                    if(editedCandleData.get(i).getHigh() > theHigh)
+                    {
+                        theHigh = editedCandleData.get(i).getHigh();
+                    }
+
+                    if(editedCandleData.get(i).getLow() < theLow)
+                    {
+                        theLow = editedCandleData.get(i).getLow();
+                    }
+                }
+
+                intervalNewArray.add(new CandleEntry(intervalNewArray.size(), theHigh, theLow,  editedCandleData.get(lastIndex).getOpen(), editedCandleData.get(editedCandleData.size() -1).getClose()));
+
+                editedCandleData = intervalNewArray;
                 break;
         }
 
