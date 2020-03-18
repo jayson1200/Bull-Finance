@@ -493,7 +493,7 @@ public class HomeFragment extends Fragment {
 
         int lastIndex;
 
-        float theHigh = 0, theLow = Float.MAX_VALUE;
+        float theHigh, theLow;
 
         switch(interval)
         {
@@ -542,6 +542,8 @@ public class HomeFragment extends Fragment {
                         theLow = editedCandleData.get(i).getLow();
                     }
                 }
+
+                Log.w("HomeFragment", theHigh + " "+ theLow + " " +  editedCandleData.get(lastIndex).getOpen() + " " + editedCandleData.get(editedCandleData.size() -1).getClose());
 
                 intervalNewArray.add(new CandleEntry(intervalNewArray.size(), theHigh, theLow,  editedCandleData.get(lastIndex).getOpen(), editedCandleData.get(editedCandleData.size() -1).getClose()));
 
@@ -711,8 +713,6 @@ public class HomeFragment extends Fragment {
     public int HowManyDaysPassed()
     {
         Calendar calendar = Calendar.getInstance();
-
-        Log.w("HomeFragment", calendar.get(Calendar.DAY_OF_YEAR) + "");
 
         return calendar.get(Calendar.DAY_OF_YEAR);
     }
