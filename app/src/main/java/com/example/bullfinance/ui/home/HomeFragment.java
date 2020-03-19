@@ -506,7 +506,7 @@ public class HomeFragment extends Fragment {
 
                 for(int i = 0; i + 5 < editedCandleData.size(); i+=5)
                 {
-                    lastIndex++;
+                    lastIndex+=5;
 
                     theHigh = 0;
                     theLow = Float.MAX_VALUE;
@@ -543,19 +543,20 @@ public class HomeFragment extends Fragment {
                     }
                 }
 
-                Log.w("HomeFragment", theHigh + " "+ theLow + " " +  editedCandleData.get(lastIndex).getOpen() + " " + editedCandleData.get(editedCandleData.size() -1).getClose());
+                Log.w("HomeFragment", /*theHigh + " "+ theLow + " " +  editedCandleData.get(lastIndex).getOpen() + " " + ""+ editedCandleData.get(editedCandleData.size() -1).getHigh()*/ lastIndex + "");
 
                 intervalNewArray.add(new CandleEntry(intervalNewArray.size(), theHigh, theLow,  editedCandleData.get(lastIndex).getOpen(), editedCandleData.get(editedCandleData.size() -1).getClose()));
 
                 editedCandleData = intervalNewArray;
                 break;
+
             case "intmonth":
                 
                 lastIndex = 0;
 
                 for(int i = 0; i + 30 < editedCandleData.size(); i+=30)
                 {
-                    lastIndex++;
+                    lastIndex+=30;
 
                     theHigh = 0;
                     theLow = Float.MAX_VALUE;
@@ -602,7 +603,7 @@ public class HomeFragment extends Fragment {
 
                 for(int i = 0; i + 180 < editedCandleData.size(); i+=180)
                 {
-                    lastIndex++;
+                    lastIndex+=180;
 
                     theHigh = 0;
                     theLow = Float.MAX_VALUE;
@@ -650,7 +651,7 @@ public class HomeFragment extends Fragment {
 
                 for(int i = 0; i + 360 < editedCandleData.size(); i+=360)
                 {
-                    lastIndex++;
+                    lastIndex+=360;
 
                     theHigh = 0;
                     theLow = Float.MAX_VALUE;
