@@ -21,6 +21,9 @@
                 android:value="com.example.bullfinance.SearchAndWatch" />
         </activity>
         <activity
+            android:name=".Search"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
             android:name=".Settings"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity

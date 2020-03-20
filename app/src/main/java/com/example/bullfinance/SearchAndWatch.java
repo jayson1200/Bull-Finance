@@ -42,7 +42,7 @@ public class SearchAndWatch extends AppCompatActivity {
             }
         });
 
-        final Intent toStockInfo = new Intent(SearchAndWatch.this, stockinfo.class);
+        final Intent toStockInfo = new Intent(SearchAndWatch.this, Search.class);
 
         usrSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
