@@ -1,34 +1,22 @@
 package com.example.bullfinance;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
-import android.app.Activity;
-import android.content.Context;
-
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -70,6 +58,8 @@ public class Search extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
 
                         ArrayList<SearchEntryInfo> searchedItemInfo = new ArrayList<SearchEntryInfo>();
+
+                        ArrayList<Button> buttons = new ArrayList<Button>();
 
                         try {
                             for (int i = 0; i < response.length(); i++) {
