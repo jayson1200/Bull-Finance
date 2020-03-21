@@ -3,21 +3,17 @@ package com.example.bullfinance.ui.home;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -25,30 +21,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.bullfinance.NetworkBridge;
 import com.example.bullfinance.R;
-import com.example.bullfinance.stockinfo;
-import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.CandleStickChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.CandleData;
 import com.github.mikephil.charting.data.CandleDataSet;
 import com.github.mikephil.charting.data.CandleEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.highlight.ChartHighlighter;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.interfaces.dataprovider.BarLineScatterCandleBubbleDataProvider;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
-
-import android.os.Handler;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Set;
 
 public class HomeFragment extends Fragment {
 
@@ -506,7 +490,7 @@ public class HomeFragment extends Fragment {
 
                 for(int i = 0; i + 5 < editedCandleData.size(); i+=5)
                 {
-                    lastIndex++;
+                    lastIndex+=5;
 
                     theHigh = 0;
                     theLow = Float.MAX_VALUE;
@@ -543,19 +527,20 @@ public class HomeFragment extends Fragment {
                     }
                 }
 
-                Log.w("HomeFragment", theHigh + " "+ theLow + " " +  editedCandleData.get(lastIndex).getOpen() + " " + editedCandleData.get(editedCandleData.size() -1).getClose());
+                Log.w("HomeFragment", /*theHigh + " "+ theLow + " " +  editedCandleData.get(lastIndex).getOpen() + " " + ""+ editedCandleData.get(editedCandleData.size() -1).getHigh()*/ lastIndex + "");
 
                 intervalNewArray.add(new CandleEntry(intervalNewArray.size(), theHigh, theLow,  editedCandleData.get(lastIndex).getOpen(), editedCandleData.get(editedCandleData.size() -1).getClose()));
 
                 editedCandleData = intervalNewArray;
                 break;
+
             case "intmonth":
                 
                 lastIndex = 0;
 
                 for(int i = 0; i + 30 < editedCandleData.size(); i+=30)
                 {
-                    lastIndex++;
+                    lastIndex+=30;
 
                     theHigh = 0;
                     theLow = Float.MAX_VALUE;
@@ -602,7 +587,7 @@ public class HomeFragment extends Fragment {
 
                 for(int i = 0; i + 180 < editedCandleData.size(); i+=180)
                 {
-                    lastIndex++;
+                    lastIndex+=180;
 
                     theHigh = 0;
                     theLow = Float.MAX_VALUE;
@@ -650,7 +635,7 @@ public class HomeFragment extends Fragment {
 
                 for(int i = 0; i + 360 < editedCandleData.size(); i+=360)
                 {
-                    lastIndex++;
+                    lastIndex+=360;
 
                     theHigh = 0;
                     theLow = Float.MAX_VALUE;
