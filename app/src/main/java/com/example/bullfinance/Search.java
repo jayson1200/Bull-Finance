@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -25,8 +26,6 @@ public class Search extends AppCompatActivity {
 
     public EditText searchEditText;
 
-    public TextView searchTextView;
-
     public String url = "";
 
     @Override
@@ -36,10 +35,6 @@ public class Search extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         searchEditText= findViewById(R.id.searchEditText2);
-
-        searchTextView = findViewById(R.id.searchTextView);
-
-        searchTextView.setMovementMethod(new ScrollingMovementMethod());
 
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -59,19 +54,26 @@ public class Search extends AppCompatActivity {
 
                         ArrayList<SearchEntryInfo> searchedItemInfo = new ArrayList<SearchEntryInfo>();
 
-                        ArrayList<Button> buttons = new ArrayList<Button>();
+                        ArrayList<ConstraintLayout> buttons = new ArrayList<ConstraintLayout>();
 
                         try {
                             for (int i = 0; i < response.length(); i++) {
                                 searchedItemInfo.add(new SearchEntryInfo(response.getJSONObject(i).getString("symbol"), response.getJSONObject(i).getString("name"), response.getJSONObject(i).getString("currency"), response.getJSONObject(i).getString("stockExchange"), response.getJSONObject(i).getString("exchangeShortName")));
                             }
 
-                            searchTextView.setText("");
-
                             for(int i = 0; i < searchedItemInfo.size(); i++)
                             {
-                                searchTextView.append(searchedItemInfo.get(i).getSymbol() + "\n" + searchedItemInfo.get(i).getName() + "\n" + searchedItemInfo.get(i).getCurrency() + "\n" + searchedItemInfo.get(i).getStockExchange() + "\n" + searchedItemInfo.get(i).getExchangeShortName() + "\n\n");
+                                ConstraintLayout currentBtn = new ConstraintLayout(getBaseContext());
+
+                                TextView currentSym = ;
+
+                                currentSym.setText(searchedItemInfo.get(i).getSymbol());
+
+                                currentBtn.
+
+                                buttons.add();
                             }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
