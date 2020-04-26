@@ -1,30 +1,22 @@
 package com.example.bullfinance;
 
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.bullfinance.ui.News.NewsFragment;
 import com.example.bullfinance.ui.home.HomeFragment;
-import com.example.bullfinance.ui.patternindicators.PatternFragment;
-import com.example.bullfinance.ui.specialstats.specialstatsFragment;
 import com.github.mikephil.charting.data.CandleEntry;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
-import androidx.appcompat.widget.Toolbar;
-import androidx.appcompat.app.ActionBar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,17 +32,6 @@ public class stockinfo extends AppCompatActivity {
     public String url = "";
     public Bundle bundle;
     public String tickerSymbol;
-
-/*    final FragmentManager fm = getSupportFragmentManager();
-
-    final Fragment homeFragment = new HomeFragment();
-    final Fragment newsFragment = new NewsFragment();
-    final Fragment patternFragment = new PatternFragment();
-    final Fragment specialStatsFragment = new specialstatsFragment();
-
-    Fragment active = homeFragment;*/
-
-
 
 
     @Override
@@ -70,14 +51,8 @@ public class stockinfo extends AppCompatActivity {
         bundle = getIntent().getExtras();
         tickerSymbol = bundle.getString("STOCKTICKER");
 
-
-
         setToolBarTitle();
         PutChartData();
-
-
-
-
     }
 
     public void setToolBarTitle()

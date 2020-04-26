@@ -34,7 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchEditText"
+        app:layout_constraintTop_toBottomOf="@+id/ToSearchLayoutBtn"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/curvedtopnewsrect" />
 
@@ -70,35 +70,34 @@
         app:layout_constraintStart_toEndOf="@+id/Bull"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/searchEditText"
+    <TextView
+        android:id="@+id/ToSearchLayoutBtn"
         android:layout_width="375dp"
         android:layout_height="51dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/curvedsearchrect"
         android:ems="10"
         android:fontFamily="@font/signika_negative_bold"
-        android:inputType="textPersonName"
-        android:paddingLeft="50dp"
-        android:text="Ticker Symbol or Name"
         android:textColor="#525151"
         android:textCursorDrawable="@android:color/black"
-        android:imeOptions="actionSearch"
         android:textSize="21dp"
+        app:iconifiedByDefault="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.615"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bullFinanceTxt" />
 
     <ImageView
-        android:id="@+id/searchGlass"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/searchEditText"
-        app:layout_constraintEnd_toEndOf="@+id/searchEditText"
-        app:layout_constraintHorizontal_bias="0.047"
-        app:layout_constraintStart_toStartOf="@+id/searchEditText"
-        app:layout_constraintTop_toTopOf="@+id/searchEditText"
-        app:srcCompat="@drawable/search" />
+        android:id="@+id/searchGlass_img"
+        android:layout_width="33dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="12dp"
+        android:backgroundTint="#050101"
+        app:layout_constraintBottom_toBottomOf="@+id/ToSearchLayoutBtn"
+        app:layout_constraintStart_toStartOf="@+id/ToSearchLayoutBtn"
+        app:layout_constraintTop_toTopOf="@+id/ToSearchLayoutBtn"
+        app:layout_constraintVertical_bias="0.50"
+        app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,15 +1,22 @@
 package com.example.bullfinance;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.text.method.ScrollingMovementMethod;
-import android.widget.Button;
-import android.widget.EditText;
+import android.util.Log;
+import android.view.Menu;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -24,9 +31,14 @@ import java.util.ArrayList;
 
 public class Search extends AppCompatActivity {
 
-    public EditText searchEditText;
-
     public String url = "";
+
+    public Typeface font;
+
+    private ConstraintLayout searchLayout;
+
+    private RecyclerView tickerBtnRecyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,66 +46,116 @@ public class Search extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        searchEditText= findViewById(R.id.searchEditText2);
+        searchLayout = findViewById(R.id.searchlayout);
 
-        searchEditText.addTextChangedListener(new TextWatcher() {
+        font = ResourcesCompat.getFont(this, R.font.signika_negative_bold_ttf_file);
+
+        tickerBtnRecyclerView = findViewById(R.id.tickerBtnRecyclerView);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
+        ActionBar theToolbar = getSupportActionBar();
+
+        theToolbar.setTitle("");
+
+        theToolbar.setDisplayHomeAsUpEnabled(true);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.tickersearch_menu, menu);
+
+        SearchView tickerSearchView = (SearchView) menu.findItem(R.id.ticker_searchview).getActionView();
+
+        TextView tickerSearchViewTextView = tickerSearchView.findViewById(androidx.appcompat.R.id.search_src_text);
+
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(tickerSearchViewTextView, InputMethodManager.SHOW_IMPLICIT);
+
+        tickerSearchView.setQueryHint("Ticker Symbol or Name");
+
+        tickerSearchView.setIconifiedByDefault(false);
+
+        //tickerSearchView.setMaxWidth(20000);
+
+        //tickerSearchView.setMinimumWidth(10000);
+
+        Log.w("Search Class: ", tickerSearchView.getWidth() + "");
+
+        tickerSearchViewTextView.setTypeface(font);
+
+
+        tickerSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            final Intent toStockInfo = new Intent(Search.this, stockinfo.class);
+
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public boolean onQueryTextSubmit(String query) {
 
+                toStockInfo.putExtra("STOCKTICKER", query.toUpperCase());
+                startActivity(toStockInfo);
+                return false;
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public boolean onQueryTextChange(String newText) {
 
-                url = "https://financialmodelingprep.com/api/v3/search?query=" + searchEditText.getText().toString() + "&limit=10";
+                newSearchUpdateRecyclerContent(newText.toUpperCase());
 
-                NetworkBridge.getInstance(getBaseContext()).addToRequestQueue(new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-
-                    @Override
-                    public void onResponse(JSONArray response) {
-
-                        ArrayList<SearchEntryInfo> searchedItemInfo = new ArrayList<SearchEntryInfo>();
-
-                        ArrayList<ConstraintLayout> buttons = new ArrayList<ConstraintLayout>();
-
-                        try {
-                            for (int i = 0; i < response.length(); i++) {
-                                searchedItemInfo.add(new SearchEntryInfo(response.getJSONObject(i).getString("symbol"), response.getJSONObject(i).getString("name"), response.getJSONObject(i).getString("currency"), response.getJSONObject(i).getString("stockExchange"), response.getJSONObject(i).getString("exchangeShortName")));
-                            }
-
-                            for(int i = 0; i < searchedItemInfo.size(); i++)
-                            {
-                                ConstraintLayout currentBtn = new ConstraintLayout(getBaseContext());
-
-                                TextView currentSym = ;
-
-                                currentSym.setText(searchedItemInfo.get(i).getSymbol());
-
-                                currentBtn.
-
-                                buttons.add();
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
-                    }
-                }));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-
+                return true;
             }
         });
+
+        return true;
+    }
+
+    private void newSearchUpdateRecyclerContent(String search_txt)
+    {
+        url = "https://financialmodelingprep.com/api/v3/search?query=" + search_txt + "&limit=20";
+
+        NetworkBridge.getInstance(getBaseContext()).addToRequestQueue(new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+
+            TickerSuggestionAdapter suggestions;
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                ArrayList<SearchEntryInfo> searchedItemInfo = new ArrayList<>();
+                ArrayList<String> stockTickers = new ArrayList<>();
+                ArrayList<String> companyNames = new ArrayList<>();
+
+                try {
+                    for (int i = 0; i < response.length(); i++) {
+                        searchedItemInfo.add(new SearchEntryInfo(response.getJSONObject(i).getString("symbol"), response.getJSONObject(i).getString("name"), response.getJSONObject(i).getString("currency"), response.getJSONObject(i).getString("stockExchange"), response.getJSONObject(i).getString("exchangeShortName")));
+                    }
+
+                    for(int i = 0; i < searchedItemInfo.size(); i++)
+                    {
+                        stockTickers.add(searchedItemInfo.get(i).getSymbol());
+                        companyNames.add(searchedItemInfo.get(i).getName());
+                    }
+
+                    suggestions = new TickerSuggestionAdapter(getApplicationContext(), stockTickers.toArray(new String[searchedItemInfo.size()]), companyNames.toArray(new String[searchedItemInfo.size()]));
+
+                    tickerBtnRecyclerView.setAdapter(suggestions);
+                    tickerBtnRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // TODO: Handle error
+            }
+        }));
     }
 }
 
@@ -128,3 +190,4 @@ class SearchEntryInfo {
         return exchangeShortName;
     }
 }
+
