@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/Bull"
-        android:layout_width="57dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:contentDescription="@string/IDKmaybelater"
@@ -22,8 +22,8 @@
 
     <ImageView
         android:id="@+id/NewsLinkImagebox"
-        android:layout_width="385dp"
-        android:layout_height="229dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_230sdp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -32,7 +32,6 @@
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ToSearchLayoutBtn"
         app:layout_constraintVertical_bias="0.0"
@@ -40,24 +39,25 @@
 
     <TextView
         android:id="@+id/watchlistText"
-        android:layout_width="227dp"
-        android:layout_height="65dp"
+        android:layout_width="@dimen/_227sdp"
+        android:layout_height="@dimen/_50sdp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/signika_negative_bold"
         android:text="Watchlist"
         android:textColor="#000000"
-        android:textSize="50dp"
+        android:textSize="@dimen/_35sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NewsLinkImagebox"
-        app:layout_constraintVertical_bias="0.048" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/bullFinanceTxt"
-        android:layout_width="231dp"
-        android:layout_height="56dp"
+        android:layout_width="@dimen/_192sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -72,18 +72,19 @@
 
     <TextView
         android:id="@+id/ToSearchLayoutBtn"
-        android:layout_width="375dp"
-        android:layout_height="51dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/curvedsearchrect"
         android:ems="10"
         android:fontFamily="@font/signika_negative_bold"
         android:textColor="#525151"
         android:textCursorDrawable="@android:color/black"
-        android:textSize="21dp"
+        android:textSize="@dimen/_16sdp"
         app:iconifiedByDefault="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.615"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bullFinanceTxt" />
 

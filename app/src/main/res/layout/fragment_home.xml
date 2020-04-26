@@ -16,8 +16,8 @@
 
         <TextView
             android:id="@+id/priceText"
-            android:layout_width="281dp"
-            android:layout_height="78dp"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_56sdp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="75dp"
             android:fontFamily="@font/signika_negative_bold"
@@ -30,7 +30,7 @@
         <com.github.mikephil.charting.charts.CandleStickChart
             android:id="@+id/chart"
             android:layout_width="0dp"
-            android:layout_height="400dp"
+            android:layout_height="@dimen/_325sdp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -41,11 +41,9 @@
 
         <HorizontalScrollView
             android:id="@+id/timeScrollView"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
             android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -59,83 +57,91 @@
 
                 <Button
                     android:id="@+id/todaybtn"
-                    android:layout_width="73dp"
-                    android:layout_height="41dp"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_31sdp"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/curvedbtn"
                     android:fontFamily="@font/signika_negative_bold"
                     android:text="Today"
+                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/fivedaybtn"
-                    android:layout_width="73dp"
-                    android:layout_height="41dp"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_31sdp"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/curvedbtn"
                     android:fontFamily="@font/signika_negative_bold"
                     android:text="5D"
+                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/todaybtn"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/twoweeksbtn"
-                    android:layout_width="73dp"
-                    android:layout_height="41dp"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_31sdp"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/curvedbtn"
                     android:fontFamily="@font/signika_negative_bold"
                     android:text="2wk"
+                    android:textSize="@dimen/_11sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/fivedaybtn"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/monthbtn"
-                    android:layout_width="73dp"
-                    android:layout_height="41dp"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_31sdp"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/curvedbtn"
                     android:fontFamily="@font/signika_negative_bold"
                     android:text="1M"
+                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/twoweeksbtn"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/sixmonthbtn"
-                    android:layout_width="73dp"
-                    android:layout_height="41dp"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_31sdp"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/curvedbtn"
                     android:fontFamily="@font/signika_negative_bold"
                     android:text="6M"
+                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/monthbtn"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/lstqtrBtn"
-                    android:layout_width="73dp"
-                    android:layout_height="41dp"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_31sdp"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/curvedbtn"
                     android:fontFamily="@font/signika_negative_bold"
                     android:text="Lst Qtr"
+                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/sixmonthbtn"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/oneyearbtn"
-                    android:layout_width="73dp"
-                    android:layout_height="41dp"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_31sdp"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/curvedbtn"
                     android:fontFamily="@font/signika_negative_bold"
                     android:text="1YR"
+                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/lstqtrBtn"
                     app:layout_constraintTop_toTopOf="parent"
@@ -143,24 +149,26 @@
 
                 <Button
                     android:id="@+id/ytdbtn"
-                    android:layout_width="73dp"
-                    android:layout_height="41dp"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_31sdp"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/curvedbtn"
                     android:fontFamily="@font/signika_negative_bold"
                     android:text="YTD"
+                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/oneyearbtn"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/alltimebtn"
-                    android:layout_width="73dp"
-                    android:layout_height="41dp"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_31sdp"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/curvedbtn"
                     android:fontFamily="@font/signika_negative_bold"
                     android:text="All Time"
+                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/ytdbtn"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -170,11 +178,9 @@
 
         <HorizontalScrollView
             android:id="@+id/intervalScrollView"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
             android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -187,60 +193,65 @@
 
                 <Button
                     android:id="@+id/intonedaybtn"
-                    android:layout_width="73dp"
-                    android:layout_height="41dp"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_31sdp"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/curvedbtn"
                     android:fontFamily="@font/signika_negative_bold"
                     android:text="1D"
+                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/intfivedaybtn"
-                    android:layout_width="73dp"
-                    android:layout_height="41dp"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_31sdp"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/curvedbtn"
                     android:fontFamily="@font/signika_negative_bold"
                     android:text="5D"
+                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/intonedaybtn"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/intmonthbtn"
-                    android:layout_width="73dp"
-                    android:layout_height="41dp"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_31sdp"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/curvedbtn"
                     android:fontFamily="@font/signika_negative_bold"
                     android:text="1M"
+                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/intfivedaybtn"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/intsixmonthbtn"
-                    android:layout_width="73dp"
-                    android:layout_height="41dp"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_31sdp"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/curvedbtn"
                     android:fontFamily="@font/signika_negative_bold"
                     android:text="6M"
+                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/intmonthbtn"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/intoneyearbtn"
-                    android:layout_width="73dp"
-                    android:layout_height="41dp"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_31sdp"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/curvedbtn"
                     android:fontFamily="@font/signika_negative_bold"
                     android:text="1YR"
+                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/intsixmonthbtn"
                     app:layout_constraintTop_toTopOf="parent"
@@ -250,25 +261,25 @@
 
         <TextView
             android:id="@+id/timeFrameText"
-            android:layout_width="102dp"
-            android:layout_height="24dp"
+            android:layout_width="@dimen/_77sdp"
+            android:layout_height="@dimen/_18sdp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:fontFamily="@font/signika_negative_bold"
             android:text="Time Frame:"
-            android:textSize="17dp"
+            android:textSize="@dimen/_13sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chart" />
 
         <TextView
             android:id="@+id/intervalText"
-            android:layout_width="102dp"
-            android:layout_height="24dp"
+            android:layout_width="@dimen/_77sdp"
+            android:layout_height="@dimen/_18sdp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/signika_negative_bold"
             android:text="Interval:"
-            android:textSize="17dp"
+            android:textSize="@dimen/_13sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/timeScrollView" />
 

@@ -18,28 +18,28 @@
 
             <TextView
                 android:id="@+id/tickerSymbol_txt"
-                android:layout_width="85dp"
+                android:layout_width="@dimen/_60sdp"
                 android:layout_height="25dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/signika_negative_bold"
                 android:text="Ticker"
-                android:textSize="20dp"
+                android:textSize="@dimen/_15sdp"
                 app:layout_constraintBottom_toTopOf="@+id/companyName_txt"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/companyName_txt"
-                android:layout_width="250dp"
-                android:layout_height="19dp"
+                android:layout_width="@dimen/_175sdp"
+                android:layout_height="@dimen/_14sdp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="4dp"
                 android:fontFamily="@font/signika_negative_bold"
                 android:text="company name"
                 android:textColor="#E6E1E1"
-                android:textSize="14dp"
+                android:textSize="@dimen/_11sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tickerSymbol_txt" />

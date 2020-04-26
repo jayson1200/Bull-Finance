@@ -73,9 +73,6 @@ public class Search extends AppCompatActivity {
 
         TextView tickerSearchViewTextView = tickerSearchView.findViewById(androidx.appcompat.R.id.search_src_text);
 
-        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(tickerSearchViewTextView, InputMethodManager.SHOW_IMPLICIT);
-
         tickerSearchView.setQueryHint("Ticker Symbol or Name");
 
         tickerSearchView.setIconifiedByDefault(false);
