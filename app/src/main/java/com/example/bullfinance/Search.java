@@ -1,12 +1,10 @@
 package com.example.bullfinance;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -33,11 +31,11 @@ public class Search extends AppCompatActivity {
 
     public String url = "";
 
-    public Typeface font;
-
     private ConstraintLayout searchLayout;
 
     private RecyclerView tickerBtnRecyclerView;
+
+    public Typeface font;
 
 
     @Override
@@ -46,9 +44,9 @@ public class Search extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        searchLayout = findViewById(R.id.searchlayout);
+        font = ResourcesCompat.getFont(getApplicationContext(), R.font.signika_negative_bold_ttf_file);
 
-        font = ResourcesCompat.getFont(this, R.font.signika_negative_bold_ttf_file);
+        searchLayout = findViewById(R.id.searchlayout);
 
         tickerBtnRecyclerView = findViewById(R.id.tickerBtnRecyclerView);
 
@@ -77,9 +75,7 @@ public class Search extends AppCompatActivity {
 
         tickerSearchView.setIconifiedByDefault(false);
 
-        //tickerSearchView.setMaxWidth(20000);
-
-        //tickerSearchView.setMinimumWidth(10000);
+        tickerSearchView.setMaxWidth(10000);
 
         Log.w("Search Class: ", tickerSearchView.getWidth() + "");
 

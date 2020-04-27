@@ -12,8 +12,8 @@
         android:id="@+id/Bull"
         android:layout_width="@dimen/_225sdp"
         android:layout_height="@dimen/_125sdp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
         android:contentDescription="@string/SplashPicture"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,17 +26,17 @@
         android:id="@+id/bullText"
         android:layout_width="@dimen/_273sdp"
         android:layout_height="@dimen/_66sdp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
         android:fontFamily="@font/signika_negative_bold"
         android:text="Bull Finance"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="@dimen/_40sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/Bull"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.28" />
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

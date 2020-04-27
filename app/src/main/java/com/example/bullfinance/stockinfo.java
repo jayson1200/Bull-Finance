@@ -1,11 +1,13 @@
 package com.example.bullfinance;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
@@ -33,6 +35,8 @@ public class stockinfo extends AppCompatActivity {
     public Bundle bundle;
     public String tickerSymbol;
 
+    public Typeface font;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,8 @@ public class stockinfo extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        font = ResourcesCompat.getFont(this, R.font.signika_negative_bold_ttf_file);
 
         bundle = getIntent().getExtras();
         tickerSymbol = bundle.getString("STOCKTICKER");

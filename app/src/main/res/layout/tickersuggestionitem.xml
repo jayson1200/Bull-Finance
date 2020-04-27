@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="1dp"
+    android:layout_margin="@dimen/_1sdp"
     android:id="@+id/itmSugLayout">
 
     <androidx.cardview.widget.CardView
@@ -19,9 +19,9 @@
             <TextView
                 android:id="@+id/tickerSymbol_txt"
                 android:layout_width="@dimen/_60sdp"
-                android:layout_height="25dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="4dp"
+                android:layout_height="@dimen/_19sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_3sdp"
                 android:fontFamily="@font/signika_negative_bold"
                 android:text="Ticker"
                 android:textSize="@dimen/_15sdp"
@@ -33,9 +33,9 @@
                 android:id="@+id/companyName_txt"
                 android:layout_width="@dimen/_175sdp"
                 android:layout_height="@dimen/_14sdp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
                 android:fontFamily="@font/signika_negative_bold"
                 android:text="company name"
                 android:textColor="#E6E1E1"
